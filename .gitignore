@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+audio/
+scenes/
+prev/
+vo.json
+events.json
+v.mp4
+raw.mp4
+engine/map_base.png
