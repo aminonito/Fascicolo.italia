@@ -157,8 +157,8 @@ def cover_folder(w=520):
 
 # mappa estesa a est (Moldavia e Ucraina): stessa proiezione, cache separata
 import inspect
-fi.MAPB["lon1"] = 36.0
-_src = inspect.getsource(fi.map_base).replace("map_base.png", "map_base_east.png").replace("range(-6, 22, 2)", "range(-6, 38, 2)")
+fi.MAPB["lon1"] = 46.0; fi.MAPB["lat1"] = 56.0
+_src = inspect.getsource(fi.map_base).replace("map_base.png", "map_base_east.png").replace("range(-6, 22, 2)", "range(-6, 48, 2)")
 exec(_src, fi.__dict__)
 fi._base = None
 
