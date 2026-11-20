@@ -80,6 +80,29 @@ def cpic(name, size):
         for k in range(5): d.line([P(.18 + k * .16, .46), P(.26 + k * .12, .88)], fill=(120, 80, 40, 255), width=S // 40)
         d.arc([P(.22, .06), P(.78, .70)], 180, 360, fill=(120, 80, 40, 255), width=S // 20)
         for (x, c) in ((.32, TOM), (.50, (220, 190, 60)), (.68, LEAF)): d.ellipse([P(x - .1, .30), P(x + .1, .50)], fill=c + (255,))
+    elif name == "bulb":
+        d.ellipse([P(.24, .08), P(.76, .60)], fill=(250, 220, 110, 255))
+        d.rectangle([P(.38, .58), P(.62, .76)], fill=(180, 180, 186, 255))
+        for k in range(3): d.line([P(.38, .62 + k * .05), P(.62, .62 + k * .05)], fill=(120, 120, 126, 255), width=S // 60)
+        d.rounded_rectangle([P(.42, .76), P(.58, .84)], S // 60, fill=(90, 90, 96, 255))
+        for a_ in (-2.6, -2.1, -1.57, -1.0, -0.5):
+            d.line([P(.50 + .34 * math.cos(a_), .34 + .34 * math.sin(a_)), P(.50 + .46 * math.cos(a_), .34 + .46 * math.sin(a_))], fill=GOLD + (255,), width=S // 40)
+    elif name == "jar":
+        d.rounded_rectangle([P(.22, .26), P(.78, .94)], S // 14, fill=(200, 220, 210, 200), outline=(150, 170, 160, 255), width=S // 50)
+        d.rectangle([P(.28, .12), P(.72, .26)], fill=(200, 160, 60, 255))
+        d.rounded_rectangle([P(.26, .44), P(.74, .90)], S // 18, fill=(214, 120, 70, 255))
+        d.rectangle([P(.30, .52), P(.70, .68)], fill=wh)
+    elif name == "salt":
+        d.polygon([P(.30, .30), P(.70, .30), P(.78, .92), P(.22, .92)], fill=wh, outline=(160, 160, 160, 255))
+        d.ellipse([P(.30, .10), P(.70, .36)], fill=(190, 192, 198, 255))
+        for (x, y) in ((.42, .18), (.50, .22), (.58, .18)): d.ellipse([P(x - .02, y - .02), P(x + .02, y + .02)], fill=dk)
+        d.text(P(.50, .62), "SALE", font=font(OSW, int(S * .10), 700), fill=dk, anchor="mm")
+    elif name == "coop":        # cooperativa agricola: albero + campo
+        d.rectangle([P(.06, .70), P(.94, .94)], fill=(110, 150, 70, 255))
+        for k in range(4): d.line([P(.10, .76 + k * .05), P(.90, .76 + k * .05)], fill=(80, 120, 50, 255), width=S // 80)
+        d.rectangle([P(.44, .40), P(.56, .72)], fill=(120, 80, 50, 255))
+        d.ellipse([P(.22, .06), P(.78, .52)], fill=LEAF + (255,))
+        for (x, y) in ((.36, .24), (.60, .20), (.50, .38)): d.ellipse([P(x - .05, y - .05), P(x + .05, y + .05)], fill=TOM + (255,))
     else:
         return None
     im = im.resize((size, size), Image.LANCZOS); _pc3[k] = im
