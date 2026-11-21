@@ -130,7 +130,7 @@ def frame(i, sc, n, total):
         if a2 > 0:
             wm = set_alpha(WM_BIG, a2)
             img.alpha_composite(wm, (int(W / 2 - wm.width / 2), int(H * 0.42 - wm.height / 2)))
-            msg = "Iscriviti: ogni settimana un nuovo caso." if FORMAT == "long" else "La storia completa è su YouTube"
+            msg = "Iscriviti: ogni giorno un nuovo caso." if FORMAT == "long" else "La storia completa è su YouTube"
             d.text((W / 2, H * 0.42 + wm.height / 2 + 70), msg, font=font(PS, 44), fill=WHITE + (int(230 * a2),), anchor="mm")
     else:
         img.alpha_composite(HDRS[HEADERS[i]])
