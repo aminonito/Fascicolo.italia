@@ -177,7 +177,7 @@ class Strada(El):
             place(lay, self.cB, (xb, lane), "mm", a); place(lay, self.cC, (xc, lane), "mm", a)
             if int(k * 4) % 2 == 0: d.ellipse([xc - 60, lane - 60, xc + 60, lane + 60], fill=(60, 120, 255, int(60 * a)))
             self.lab(d, xb, lane - 70, "DANIELE BARILLÀ", a, col=GOLD); self.lab(d, xc, lane + 70, "CARABINIERI", a)
-            if k > 1.0: place(lay, fx.icon("handcuffs", 150), (xb + 200, lane - 20), "mm", a)
+            if k > 1.0: place(lay, fx.icon("lock", 130), (xb + 200, lane - 20), "mm", a)
 
 class Muro(El):
     """il muro dei giorni: anni dal 1992 al 1999, colonne di tacche che si riempiono e contatore."""
