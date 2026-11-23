@@ -105,6 +105,11 @@ def bpic(name, size):
         d.rounded_rectangle([P(.22, .18), P(.78, .82)], S // 16, fill=(220, 220, 214, 255), outline=(80, 80, 80, 255), width=lw)
         d.ellipse([P(.40, .28), P(.60, .48)], fill=(200, 40, 40, 255))
         for j in range(3): d.rectangle([P(.32, .56 + j * .07), P(.68, .60 + j * .07)], fill=(90, 90, 90, 255))
+    elif name == "bond":          # titolo generico in dollari, senza intestazioni reali
+        d.rectangle([P(.12, .22), P(.88, .78)], fill=(232, 222, 190, 255), outline=(120, 100, 60, 255), width=lw)
+        d.rectangle([P(.17, .27), P(.83, .73)], outline=(160, 130, 80, 255), width=max(1, lw // 2))
+        d.text(P(.50, .40), "TITOLO", font=font(OSW, int(S * .09), 700), fill=(90, 70, 40, 255), anchor="mm")
+        d.text(P(.50, .58), "$ 1.000", font=font(OSW, int(S * .08), 700), fill=(90, 70, 40, 255), anchor="mm")
     else:
         return None
     im = im.resize((size, size), Image.LANCZOS); _bk[k] = im; return im
@@ -226,7 +231,7 @@ class Strada(El):
         x0, y0, x1, y1 = self.box; d = ImageDraw.Draw(lay); al = int(255 * a); k = t - self.t0
         sky = (16, 20, 40) if self.night else (150, 180, 210)
         d.rectangle([x0, y0, x1, y1], fill=sky + (al,))
-        if self.night: d.ellipse([x1 - 160, y0 + 30, x1 - 100, y0 + 90], fill=(230, 226, 200, al))
+        if self.night: d.ellipse([x0 + (x1 - x0) * .42, y0 + 30, x0 + (x1 - x0) * .42 + 60, y0 + 90], fill=(230, 226, 200, al))
         gy = y1 - 120
         # edifici di sfondo (lato opposto)
         rr = random.Random(5)
@@ -247,6 +252,7 @@ class Strada(El):
                 lit = (fl == 1) and self.night
                 d.rectangle([bx0 + 30 + c * (bx1 - bx0 - 40) / 5, fy, bx0 + 30 + c * (bx1 - bx0 - 40) / 5 + 60, fy + 70],
                             fill=((250, 220, 130) if lit else (30, 30, 36)) + (al,))
+        d.rounded_rectangle([(bx0 + bx1) / 2 - 250, y0 + 78, (bx0 + bx1) / 2 + 250, y0 + 122], 8, fill=(14, 12, 11, int(220 * a)))
         d.text(((bx0 + bx1) / 2, y0 + 100), "IL DEPOSITO · 2° PIANO: LA CONTA", font=font(OSW, 28, 700), fill=(240, 236, 220, al), anchor="mm")
         d.rectangle([bx0 + 40, gy - 110, bx0 + 110, gy], fill=(50, 34, 24, al))
         # strada
