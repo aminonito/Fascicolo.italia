@@ -14,7 +14,7 @@ FT = "Fonti: Corte di cassazione n. 22/2019 · CEDU 2/5/2024 · Il Post (2024) �
 V = {
  0: [("Estate", "Estate\n*1964*", "cal:ESTATE|1964"), ("peschereccio", "Un *peschereccio*\ndi Fano", "mare:fondo"),
      ("rete", "Tirano su\nla *rete*", "mare:rete"), ("statua", "Una statua\ndi *bronzo*", "i:statue_crust|SAGOMA STILIZZATA · NON È L'OPERA"),
-     ("duemila", "Oltre\n*2.000 anni*", "big:2.000+|anni sul fondo del mare")],
+     ("duemila", "Oltre\n*2.000 anni*", "big:2.000+|anni di età")],
  1: [("Nessuno", "Nessuno\nla *denuncia*", "mare:rotta"), ("campo", "Un campo\ndi *cavoli*", "i:cabbage|CARRARA DI FANO"),
      ("Gubbio", "Poi a\n*Gubbio*", "map:Fano,Gubbio|Fano>Gubbio|60"), ("sacerdote", "Nella casa\ndi un *sacerdote*", "i:priest|")],
  2: [("Tre", "*3,5 milioni*\ndi lire", "big:3,5 mln|di lire · 1964"), ("Processati", "Il *processo*", "i:gavel|PERUGIA · FINO AL 1970"),
