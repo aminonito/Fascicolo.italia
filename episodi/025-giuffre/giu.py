@@ -145,3 +145,26 @@ def _icon_g(name, size, color=None):
         if m is not None: return m
     return _prev_icon_g(name, size, color)
 fx.icon = _icon_g
+
+_prev_icon_h = fx.icon
+def _icon_h(name, size, color=None):
+    if name in ("law", "handshake"):
+        k = (name, size)
+        if k in _gk: return _gk[k]
+        S = size * 3; im = Image.new("RGBA", (S, S), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+        P = lambda a, b: (a * S, b * S); lw = max(3, S // 60)
+        if name == "law":       # volume di legge generico, senza numeri
+            d.rectangle([P(.24, .10), P(.76, .90)], fill=(150, 40, 36, 255), outline=(90, 20, 18, 255), width=lw)
+            d.rectangle([P(.30, .16), P(.70, .84)], outline=(220, 180, 90, 255), width=lw)
+            d.text(P(.50, .50), "LEGGE", font=font(OSW, int(S * .11), 700), fill=(230, 196, 110, 255), anchor="mm")
+        else:                   # mano che porge una moneta: prestare
+            d.rounded_rectangle([P(.10, .52), P(.62, .70)], int(S * .06), fill=(222, 190, 160, 255))
+            for j in range(3): d.rounded_rectangle([P(.50 + j * .0, .40 + j * .0), P(.66, .52)], int(S * .04), fill=(222, 190, 160, 255))
+            d.rectangle([P(.02, .50), P(.14, .72)], fill=(70, 90, 130, 255))
+            d.ellipse([P(.58, .18), P(.90, .50)], fill=(220, 180, 70, 255), outline=(150, 110, 30, 255), width=lw)
+            d.text(P(.74, .34), "L.", font=font(SERIF, int(S * .12)), fill=(120, 80, 20, 255), anchor="mm")
+            d.line([P(.40, .30), P(.56, .30)], fill=(200, 60, 50, 255), width=lw * 2)
+            d.polygon([P(.56, .25), P(.62, .30), P(.56, .35)], fill=(200, 60, 50, 255))
+        im = im.resize((size, size), Image.LANCZOS); _gk[k] = im; return im
+    return _prev_icon_h(name, size, color)
+fx.icon = _icon_h
