@@ -82,10 +82,23 @@ fx = fx[:N2]
 sf.write("audio/sfx.wav", fx.astype(np.float32), SR)
 
 # ---------------- voce ----------------
-vo = np.zeros(N2)
+# controlli anti-sovrapposizione: ogni scena deve avere la sua voce, lunga quanto vo.json dice, e finire
+# prima che parta la voce della scena dopo. Se qualcosa non torna il montaggio si FERMA (mai voci una sopra l'altra).
+VO = json.load(open("vo.json")); NS = len(E["starts"])
+assert len(VO) == NS, f"vo.json ha {len(VO)} scene, il video {NS}: rifare vo_merge e render events"
+extra = [f for f in os.listdir("audio") if f.startswith("s") and f.endswith(".wav") and f[1:-4].isdigit() and int(f[1:-4]) >= NS]
+assert not extra, f"file voce in più in audio/: {extra} (resti di una versione vecchia): rifare vo_merge"
+vo = np.zeros(N2); spans = []
 for i, st in enumerate(E["starts"]):
     a, sr = sf.read(f"audio/s{i}.wav", dtype="float32")
+    if a.ndim > 1: a = a.mean(1)
+    d = len(a) / sr
+    assert abs(d - VO[i]["dur"]) < 0.05, f"scena {i}: voce di {d:.2f}s ma vo.json dice {VO[i]['dur']:.2f}s: rifare vo_merge"
     a = np.interp(np.arange(int(len(a) * SR / sr)) * sr / SR, np.arange(len(a)), a)
-    s = int((st + E["lead"][i]) * SR); e = min(N2, s + len(a)); vo[s:e] += a[:e - s]
+    s = int((st + E["lead"][i]) * SR); e = min(N2, s + len(a))
+    spans.append((s, s + len(a)))
+    vo[s:e] += a[:e - s]
+for i in range(1, len(spans)):
+    assert spans[i][0] >= spans[i - 1][1], f"scene {i-1}/{i}: voci sovrapposte di {(spans[i-1][1]-spans[i][0])/SR:.2f}s"
 sf.write("audio/voice.wav", vo.astype(np.float32), SR)
 print("audio ok", round(TOT, 1))

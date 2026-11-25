@@ -4,6 +4,7 @@ set -e
 E="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OUT=${1:-out.mp4}; MV=${2:-0.55}
 mkdir -p audio scenes prev
+[ -f vo.json ] || { echo "STOP: manca vo.json"; exit 1; }
 python3 $E/render.py events
 python3 $E/audio.py
 VCH="highpass=f=80,equalizer=f=300:t=q:w=1.2:g=-2.5,equalizer=f=3000:t=q:w=1.2:g=2,equalizer=f=7500:t=q:w=1.5:g=-2,acompressor=threshold=-24dB:ratio=3:attack=5:release=90:makeup=3,alimiter=limit=0.9"
@@ -14,4 +15,5 @@ seq 0 $((N-1)) | xargs -P $(nproc) -I{} python3 $E/render.py scene {}
 ffmpeg -y -v error -f concat -safe 0 -i scenes/list.txt -c copy v.mp4
 ffmpeg -y -v error -i v.mp4 -i audio/mix_final.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest -movflags +faststart "$OUT"
 ffprobe -v error -show_entries format=duration -of csv=p=0 "$OUT"
+python3 $E/check_voice.py "$OUT"
 python3 $E/render.py chapters

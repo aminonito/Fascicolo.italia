@@ -8,6 +8,8 @@ VOICE = os.environ.get("VOICE", "im_nicola")
 SPEED = float(sys.argv[1]) if len(sys.argv) > 1 else 1.1
 SR = 24000
 os.makedirs("audio", exist_ok=True)
+for f in os.listdir("audio"):  # via le voci di versioni vecchie: mai resti in audio/
+    if f.startswith("s") and f.endswith(".wav") and f[1:-4].isdigit(): os.remove("audio/" + f)
 def trim(a):
     idx = np.where(np.abs(a) > 0.008)[0]
     return a[max(0, idx[0] - 300): idx[-1] + 600]
