@@ -87,6 +87,13 @@ def cpic(name, size):
         d.rectangle([P(.16, .20), P(.70, .86)], fill=PAPER, outline=(150, 130, 100, 255), width=lw)
         for y in (.34, .44, .54, .64): d.line([P(.24, y), P(.62, y)], fill=(90, 90, 100, 255), width=lw)
         d.polygon([P(.86, .10), P(.92, .16), P(.56, .74), P(.52, .74)], fill=(235, 235, 235, 255), outline=(120, 120, 120, 255))
+    elif name == "potion":               # boccetta di un «rimedio» (nessuna etichetta)
+        d.rectangle([P(.44, .10), P(.56, .26)], fill=(120, 90, 60, 255))
+        d.rectangle([P(.40, .24), P(.60, .32)], fill=(170, 170, 180, 255))
+        d.ellipse([P(.22, .30), P(.78, .90)], fill=(110, 60, 150, 255), outline=(200, 200, 210, 255), width=lw)
+        d.ellipse([P(.32, .42), P(.44, .54)], fill=(190, 150, 230, 255))
+        for a_ in (200, 250, 300, 340):
+            r = .40; d.ellipse([P(.5 + r * math.cos(math.radians(a_)) - .02, .58 + r * math.sin(math.radians(a_)) - .02), P(.5 + r * math.cos(math.radians(a_)) + .02, .58 + r * math.sin(math.radians(a_)) + .02)], fill=GOLDC)
     elif name == "mirrors":              # galleria degli specchi stilizzata
         d.rectangle([P(.04, .20), P(.96, .86)], fill=(120, 96, 60, 255))
         for x in (.10, .30, .50, .70): d.rectangle([P(x, .30), P(x + .16, .76)], fill=(190, 210, 225, 255), outline=GOLDK, width=lw)
