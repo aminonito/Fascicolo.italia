@@ -12,7 +12,7 @@ from fx import *
 WPL.update({"Torino": (7.68, 45.07), "Collegno": (7.57, 45.08), "Verona": (10.99, 45.44), "Padova": (11.88, 45.41),
             "Desenzano": (10.54, 45.47), "Pallanza": (8.55, 45.92), "Firenze": (11.25, 43.77), "Roma": (12.50, 41.90),
             "Monastir": (21.33, 41.03), "Salonicco": (22.94, 40.64), "Rio de Janeiro": (-43.20, -22.90), "Milano": (9.19, 45.46),
-            "Taranto": (17.24, 40.47)})
+            "Taranto": (17.24, 40.47), "Aquileia": (13.37, 45.77)})
 
 def cover_folder28(w=520):
     h = int(w * 0.78); im = paper(w, h, (196, 160, 104), 38, 0.6); d = ImageDraw.Draw(im)
